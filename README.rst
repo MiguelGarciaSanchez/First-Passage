@@ -31,7 +31,7 @@ main_sphere.py:
 		|
 		| main_sphere.py counts with paralelization: You can choose the number of cores to use in the 		n_cores parameter.
 
-main_circunference.py: 
+main_circumference.py: 
 ----------------------
 	Computes the global mean time until absorption of a brownian particle diffusing in a circunference.
 		|
