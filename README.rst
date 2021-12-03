@@ -41,7 +41,7 @@ main_circunference.py:
 		| Also allows paralelization.
 
 Data Storage:
--------------
+=============
 
 Each program save the initial positions of the particles and their mean time until absorption in a dataframe. The dataframes are storaged in (./Data/Sphere/ or ./Data/Circumference)
 
