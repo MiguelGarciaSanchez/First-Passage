@@ -38,6 +38,7 @@ if __name__ == "__main__":
 
     # Simulation
     df = f.MFPT_Sphere_MP(reg_abs, reg_refl, dt, D, n_cores, n_initial_pos, n_rep)
+    #df = f.MFPT_Sphere_Negative_MP(reg_abs,dt,D,n_cores,n_initial_pos,n_rep) #Uncomment for particle escaping the circular patch (reg_abs)
     df.to_pickle("../Data/Sphere/IgG2a.pkl")
 
 

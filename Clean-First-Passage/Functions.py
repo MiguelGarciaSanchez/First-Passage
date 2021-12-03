@@ -273,9 +273,9 @@ def MFPT_Circumference_MP(reg_abs,dt,D,n_cores,n_initial_pos,n_rep):
 ## Functions related with diffusion on the sphere.
 
 @jit(nopython=True)
-def Initial_Position_Sphere_Square(reg_abs):
+def Initial_Position_Sphere_Negative(reg_abs):
     """
-    Initial_Position: Computes the initial position of a particle, when we are interested 
+    Initial_Position_Sphere_Negative: Computes the initial position of a particle, when we are interested 
     on computing time until the particle escapes from a circular patch of aperture angle 
     delta.
     Inputs:
@@ -357,19 +357,12 @@ def Reflection(reg_refl, theta, phi):
 
 
 @jit(nopython=True)
-def Diff_Tang_Plane(dt,D):
-    """
-    Diff_Tang_Plane: Diffusion step on the orthogonal tangent plane to the north pole.
-    Inputs:
-        dt: Temporal step.
-        D: Diffusion coefficient.
-    Output:
-        pos: [x,y,z].
-    """
+def Diff_Tang_Plane(theta,phi,dt,D):
 
     # Base of the tangential plane to the north pole
     e1 = np.array([1,0,0])
     e2 = np.array([0,1,0])
+    
     # Diffussion
     r1 = np.random.normal(0,1)
     r2 = np.random.normal(0,1)
@@ -377,8 +370,17 @@ def Diff_Tang_Plane(dt,D):
     delta = np.sqrt(2*dt*D)*(e1*r1+e2*r2)
     pos = np.array([0,0,1])
     pos = (pos + delta)
-    pos = pos/np.sqrt(pos[0]**2+ pos[1]**2 + pos[2]**2) 
-    return pos
+    new_pos = pos/np.sqrt(pos[0]**2+ pos[1]**2 + pos[2]**2) 
+    
+    # Rotations
+    x1 = new_pos[0]*np.cos(-theta) - new_pos[2]*np.sin(-theta)
+    y1 = new_pos[1]
+    z = new_pos[0]*np.sin(-theta) + new_pos[2]*np.cos(-theta)
+    
+    x = x1*np.cos(-phi)+y1*np.sin(-phi)
+    y = -x1*np.sin(-phi)+y1*np.cos(-phi)
+
+    return [x,y,z]
 
 
 def Diff_Sphere(reg_refl,reg_abs,dt, D,pos0): 
@@ -416,12 +418,8 @@ def Diff_Sphere(reg_refl,reg_abs,dt, D,pos0):
             ## Diffusion step
             t = t+dt #Update time
             theta,phi = Cart2Sph(last_pos[0],last_pos[1],last_pos[2])
-            new_pos= Diff_Tang_Plane(theta, phi,dt,D)
-
-            # Rotate the sphere
-            new_pos = np.array( [new_pos[0]*np.cos(-theta) - new_pos[2]*np.sin(-theta), new_pos[1], new_pos[0]*np.sin(-theta) + new_pos[2]*np.cos(-theta)])
-            x,y,z = np.array([new_pos[0]*np.cos(-phi)+new_pos[1]*np.sin(-phi),-new_pos[0]*np.sin(-phi)+new_pos[1]*np.cos(-phi),new_pos[2]])
-
+            x,y,z = Diff_Tang_Plane(theta, phi,dt,D)
+            
             ## Absorption and reflection check
             theta, phi = Cart2Sph(x, y,z)
 
@@ -476,9 +474,8 @@ def Diff_Sphere_Pos(reg_refl,reg_abs,dt, D,pos0):
             ## Diffusion step
             t.append(t[-1] + dt)
             theta,phi = Cart2Sph(pos[0][-1],pos[1][-1],pos[2][-1])
-            new_pos = Diff_Tang_Plane(theta, phi,dt,D)
-            new_pos = np.array( [new_pos[0]*np.cos(-theta) - new_pos[2]*np.sin(-theta), new_pos[1], new_pos[0]*np.sin(-theta) + new_pos[2]*np.cos(-theta)])
-            x,y,z = np.array([new_pos[0]*np.cos(-phi)+new_pos[1]*np.sin(-phi),-new_pos[0]*np.sin(-phi)+new_pos[1]*np.cos(-phi),new_pos[2]])   
+            x,y,z = Diff_Tang_Plane(theta, phi,dt,D)
+
             ## Reflection and absorption check
             theta, phi = Cart2Sph(x, y, z)
 
@@ -526,10 +523,7 @@ def Diff_Sphere_Negative(reg_abs,dt,D,pos0):
         ## Diffusion step
         t = t+dt
         theta,phi = Cart2Sph(last_pos[0],last_pos[1],last_pos[2])
-        new_pos= Diff_Tang_Plane(theta, phi,dt,D)
-        # Rotate the sphere
-        new_pos = np.array( [new_pos[0]*np.cos(-theta) - new_pos[2]*np.sin(-theta), new_pos[1], new_pos[0]*np.sin(-theta) + new_pos[2]*np.cos(-theta)])
-        x,y,z = np.array([new_pos[0]*np.cos(-phi)+new_pos[1]*np.sin(-phi),-new_pos[0]*np.sin(-phi)+new_pos[1]*np.cos(-phi),new_pos[2]])
+        x,y,z= Diff_Tang_Plane(theta, phi,dt,D)
 
         ## Reflection and absorption check
         theta, phi = Cart2Sph(x, y,z)
@@ -574,10 +568,8 @@ def Diff_Sphere_Negative_Pos(reg_abs,dt,D,pos0):
         ## Diffusion step
         t.append(t[-1] + dt)
         theta,phi = Cart2Sph(pos[0][-1],pos[1][-1],pos[2][-1])
-        new_pos = Diff_Tang_Plane(theta, phi,dt,D)
-        #Rotation
-        new_pos = np.array( [new_pos[0]*np.cos(-theta) - new_pos[2]*np.sin(-theta), new_pos[1], new_pos[0]*np.sin(-theta) + new_pos[2]*np.cos(-theta)])
-        x,y,z = np.array([new_pos[0]*np.cos(-phi)+new_pos[1]*np.sin(-phi),-new_pos[0]*np.sin(-phi)+new_pos[1]*np.cos(-phi),new_pos[2]])   
+        x,y,z = Diff_Tang_Plane(theta, phi,dt,D)
+
         ## Reflection and absorption check
         theta, phi = Cart2Sph(x, y, z)
 
@@ -697,7 +689,7 @@ def MFPT_Sphere_Negative(reg_abs,dt,D,n_initial_pos,n_rep,list_mfpt,
     for i_initial_pos in range(n_initial_pos):
         # Random initial position
         start_time = process_time()
-        pos0_3d = Initial_Position_Sphere_Square(reg_abs)  # Initial pos on the sphere
+        pos0_3d = Initial_Position_Sphere_Negative(reg_abs)  # Initial pos on the sphere
         times_3d = [] #Vector with times for diffusion on the sphere
         for j_repetitions in range(n_rep):
             t = Diff_Sphere_Negative(reg_abs,dt, D,pos0_3d)
