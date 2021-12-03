@@ -7,7 +7,7 @@ First-Passage
 
 
 Installation:
-------------
+-------------
 .. code:: bash
 
     git clone https://github.com/MiguelGarciaSanchez/Clean-First-Passage
@@ -27,7 +27,6 @@ main_sphere.py:
 ---------------
 .. sidebar::
 	Computes the  mean time until absorption of a brownian particle diffusing on a 	spherical surface.
-
 		| Absorbing region: Represented by a spherical cap [[theta_min,theta_max],delta] with pole 	 	[theta_min, theta_max] and maximum arc length delta.
 		|
 		| Reflecting boundary: Given by min and max angles [theta_min, theta_max], [phi_min, phi_max]
@@ -37,6 +36,7 @@ main_sphere.py:
 
 
 main_circunference.py: 
+----------------------
 .. sidebar::
 	Computes the global mean time until absorption of a brownian particle diffusing in a circunference.
 		| Absorbing region: Given by min and max angles [theta_min, theta_max]
@@ -49,6 +49,8 @@ Each program save the initial positions of the particles and their mean time unt
 
  
 
+
+	
 
 	
 			  
