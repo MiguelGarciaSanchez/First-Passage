@@ -2,7 +2,7 @@
 First-Passage
 ===========================================
 
-- Simulates  brownian motions until absorption in a circunference or on a spherical surface.
+- Simulates  brownian motions until absorption in a circumference or on a spherical surface.
 - Computes the mean time until absorption for each initial position.
 
 
