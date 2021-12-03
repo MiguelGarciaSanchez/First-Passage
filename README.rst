@@ -33,6 +33,8 @@ Computes the  mean time until absorption of a brownian particle diffusing on a 	
 	- Reflecting boundary: Given by min and max angles [theta_min, theta_max], [phi_min, phi_max]
 	
 	main_sphere.py counts with paralelization: You can choose the number of cores to use in the 		n_cores parameter.
+	
+	
 
 main_circunference.py: 
 ----------------------
