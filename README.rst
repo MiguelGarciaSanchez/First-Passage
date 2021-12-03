@@ -25,7 +25,6 @@ Main Programms:
 
 main_sphere.py: 
 ---------------
-.. sidebar::
 	Computes the  mean time until absorption of a brownian particle diffusing on a 	spherical surface.
 		| Absorbing region: Represented by a spherical cap [[theta_min,theta_max],delta] with pole 	 	[theta_min, theta_max] and maximum arc length delta.
 		|
