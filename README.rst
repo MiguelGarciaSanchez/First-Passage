@@ -1,7 +1,7 @@
 First-Passage
 =============
 
-- Simulates  brownian motions until absorption in a circunference or on a spherical surface.
+- Simulates  Brownian motions until absorption in a circunference or on a spherical surface.
 - Computes the mean time until absorption for each initial position.
 - Computes the mean time until escaping a circular patch on the surface of a sphere for each initial position.
 
@@ -33,7 +33,7 @@ main_sphere.py:
 
 main_circumference.py: 
 ----------------------
-	Computes the global mean time until absorption of a brownian particle diffusing in a circunference.
+	Computes the global mean time until absorption of a brownian particle diffusing in a circumference.
 		|
 		| Absorbing region: Given by min and max angles [theta_min, theta_max]
 		|
