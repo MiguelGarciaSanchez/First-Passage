@@ -3,7 +3,7 @@ First-Passage
 
 - Simulates  brownian motions until absorption in a circunference or on a spherical surface.
 - Computes the mean time until absorption for each initial position.
-- Computes the mean time until escaping a circular patch on the surface of a sphere.
+- Computes the mean time until escaping a circular patch on the surface of a sphere for each initial position.
 
 Installation:
 -------------
