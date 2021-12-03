@@ -11,7 +11,6 @@ Installation:
     git clone https://github.com/MiguelGarciaSanchez/Clean-First-Passage
     cd Clean-First-Passage
     pip install -r requirements.txt
-    python setup.py install
 
 Example:
 --------
