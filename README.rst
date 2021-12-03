@@ -40,5 +40,5 @@ main_circunference.py:
 
 Data Storage:
 =============
-Each program saves the initial positions of the particles and their mean time until absorption in a dataframe. The dataframes are storaged in (./Data/Sphere/ or ./Data/Circumference)
+Each program saves the initial positions of the particles and their mean time until absorption in a dataframe. The dataframes are stored in (./Data/Sphere/ or ./Data/Circumference)
 
