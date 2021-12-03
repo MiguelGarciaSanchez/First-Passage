@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 First-Passage
 ===========================================
 
@@ -67,4 +66,3 @@ Each program saves the initial positions of the particles and their mean time un
 
 Each program save the initial positions of the particles and their mean time until absorption in a dataframe. The dataframes are storaged in (./Data/Sphere/ or ./Data/Circumference)
 
->>>>>>> 69cb6f9681573cc3498e191ff79d6050f01deac6
