@@ -19,9 +19,10 @@ phi_max = 360
 reg_refl = np.array([[theta_min,theta_max],[phi_min,phi_max]]) * np.pi/180  
 
 # Absorbing boundary
-theta_pole = 0
+theta_pole = 86
 phi_pole = 90
-reg_abs = (np.array([86*np.pi/180,90*np.pi/180]),19/2*np.pi/180) 
+delta = 19/2 # Max arc length of the absorbing patch
+reg_abs = (np.array([theta_pole*np.pi/180,phi_pole*np.pi/180]),delta*np.pi/180) 
 
 ##############################################################################
 
