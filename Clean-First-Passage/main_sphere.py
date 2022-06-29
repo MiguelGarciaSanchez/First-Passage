@@ -14,11 +14,11 @@ if __name__ == "__main__":
     dt = 0.0001
     D = 1       
     # Reflecting boundary
-    theta_min = 77
-    theta_max = 137
+    theta_min = 0
+    theta_max = 90
     reg_refl = np.array([[theta_min,theta_max],[0,360]]) * np.pi/180   #[[theta_min, theta_max], [phi_min,phi_max]]
     # Absorbing boundary
-    theta_pole = 86
+    theta_pole = 0
     delta = 19/2
     phi_pole = 90
     reg_abs = (np.array([theta_pole*np.pi/180,phi_pole*np.pi/180]),delta*np.pi/180) #[[theta_pole,phi_pole], Angle_aperture]

@@ -4,7 +4,8 @@ from numba import jit
 import pandas as pd
 import numpy as np
 import multiprocessing as mp
-
+import seaborn as sns
+colors = sns.color_palette("colorblind")
 
 ##############################################################################
 ##############################################################################
@@ -149,7 +150,7 @@ def plot_abs_patch(reg_abs,ax):
     new_pos = np.array(new_pos)
     #Particle
     pos= Sph2Cart(new_pos[:,0],new_pos[:,1])
-    ax.plot3D(pos[0],pos[1],pos[2],'-.',color=[22/255,214/255,16/255])
+    ax.plot3D(pos[0],pos[1],pos[2],'-.',color="#CB3234")
     return
 
 ##############################################################################
